@@ -1,38 +1,56 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:3000";
-const socket = socketIOClient(ENDPOINT)
+const baseUrl =  process.env.REACT_APP_BASE_URL;
+const extension = process.env.REACT_APP_EXTENSION
+const socket = socketIOClient(`${baseUrl}/${extension}`);
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sender: {},
-      value: '',
-      fakeObject: [{"username":"fakeusername","message":"fakeMessage"},{"username":"fakeusername","message":"fakeMessage"},{"username":"fakeusername","message":"fakeMessage"}]
+      sender: ["This user has joined", "Tek three has joined"],
+      value: "",
+      username: "",
+      boolean: false,
+      fakeObject: [
+        { username: "fakeusername", message: "fakeMessage" },
+        { username: "fakeusername", message: "fakeMessage" },
+        { username: "fakeusername", message: "fakeMessage" },
+      ],
     };
-    
   }
   // message and username
-  
 
   // update state with newobject
-  showObject(){
-    const newObject = {key: {"username":"fakeusername","message":"fakeMessage"}}
+  showObject() {
+    const newObject = {
+      key: { username: "fakeusername", message: "fakeMessage" },
+    };
     this.state.fakeObject.push(newObject);
-    console.log(this.state.fakeObject)
+    console.log(this.state.fakeObject);
   }
 
+  componentDidMount() {
+    socket.on("messageOut", (sender) => {
+      this.state.fakeObject.push(sender);
+      this.setState({ sender: sender });
+    });
 
-  componentDidMount(){
-    socket.on("listening", (sender) => {
-      this.setState({ sender: sender})
-    })
+    socket.on("stringOut", (sender) => {
+      this.state.sender.push(sender);
+    });
   }
 
-    // on submit - socket.emit - username and message
-  send(){
-    socket.emit("message", this.state.value)
+  // on submit - socket.emit - username and message
+  send(e) {
+    e.preventDefault();
+    socket.emit("message", this.state.value);
+  }
+
+  userName(e) {
+    e.preventDefault();
+    socket.emit("initialLogin", this.state.username);
+    this.setState({ boolean: true });
   }
 
   render() {
@@ -43,40 +61,56 @@ export default class Main extends Component {
             {this.state.fakeObject.map((messages, idx) => (
               <div className="blub-wrapper-one" key={idx}>
                 <div className="blub-wrapper-one">
-                  <p>this is a test</p>
+                  <p>
+                    {messages.username} {messages.message}
+                  </p>
                 </div>
               </div>
-          ))}
-            <div className="blub-wrapper-one">
-              
-              <p>this is a test</p>
-            </div>
-            <div className="blub-wrapper-one">
-              <p>This is a test on text</p>
-            </div>
-            <div className="blub-wrapper-two">
-              <p>This is a test on text</p>
-            </div>
-            <div className="blub-wrapper-two">
-              <p>does it blend</p>
-            </div>
-            <div className="blub-wrapper-one">
-              <p>wrapper one is grey</p>
-            </div>
-            <div className="blub-wrapper-two">
-              <p>This is a test on text</p>
-            </div>
+            ))}
+
+            {this.state.sender.map((messages, idx) => (
+              <div className="blub-wrapper-one" key={idx}>
+                <div className="blub-wrapper-one">
+                  <p>{messages}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="input-wrapper">
-            <form className="input">
-              <label>
-                <input onChange={(e) => this.setState({ value: e.target.value })} className="text-input" placeholder="text message" type="text" name="name"></input>
-              </label>
-              <input onClick={() => this.send()} type="submit" value="Send" />
-              <input type="submit" value="save" />
-            </form>
-            <button onClick={() => this.showObject()}>here</button>
-          </div>
+
+          {this.state.boolean === false ? (
+            <div className="input-wrapper">
+              <form className="input">
+                <label>
+                  <input
+                    onChange={(e) =>
+                      this.setState({ username: e.target.value })
+                    }
+                    className="text-input"
+                    placeholder="Input User"
+                    type="text"
+                    name="name"
+                  ></input>
+                </label>
+                <input onClick={(e) => this.userName(e)} type="submit" />
+              </form>
+            </div>
+          ) : (
+            <div className="input-wrapper">
+              <form className="input">
+                <label>
+                  <input
+                    onChange={(e) => this.setState({ value: e.target.value })}
+                    className="text-input"
+                    placeholder="text message"
+                    type="text"
+                    name="name"
+                  ></input>
+                </label>
+                <input onClick={(e) => this.send(e)} type="submit" />
+              </form>
+              <button onClick={() => this.showObject()}>here</button>
+            </div>
+          )}
         </div>
       </div>
     );
