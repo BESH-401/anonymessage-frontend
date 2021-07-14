@@ -1,11 +1,14 @@
 .App {
   text-align: center;
   padding-bottom: 20%;
+  background-color: #9499a5;
 }
 
 
 .App-header {
-  background-color: #282c34;
+  background: rgb(13,31,60);
+  background: linear-gradient(17deg, rgba(13,31,60,1) 35%, rgba(26,62,132,1) 100%);
+  padding: 30px;
   margin-bottom: 50px;
   min-height: 30px;
   display: flex;
@@ -137,4 +140,8 @@ a.button6:active{
 .spacer{
   height: 5%;
   background-color: #3369ff;
+}
+
+.logo{
+  width: 350px;
 }

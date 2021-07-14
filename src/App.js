@@ -1,12 +1,13 @@
 import './App.css';
 import Main from './components/Main.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './logo.png'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Anony Message</h2>
+        <img className="logo" src={logo} alt="logo"></img>
       </header>
         <Main/>
     </div>
