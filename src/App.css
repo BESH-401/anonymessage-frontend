@@ -19,6 +19,10 @@
 .App-link {
   color: #61dafb;
 }
+.container{
+  margin: auto;
+  max-width: 1000px;
+}
 
 .main-wrapper{
   display: flex;
@@ -27,7 +31,7 @@
   border-radius: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin: auto;
+  margin: 0 auto 30px auto;
   width: 80%;
   height: 80vh;
   background-color: #282c34;
@@ -45,25 +49,29 @@ p{
 }
 
 .input-wrapper{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
   border-radius: 30px;
   background-color: #4c525c;
   margin: auto;
   width: 90%;
-  height: 100px;
+  
+}
+
+.input-wrapper2{
+  padding: 10px;
+  border-radius: 30px;
+  background-color: #ccd1d8;
+  margin: auto;
+  width: 80%;
+  
 }
 
 form{
   width: 100%;
 }
 
-input{
+form.input{
   width: 100%;
-  margin-top: 10px;
-  margin-right: 10px;
-  border: none;
 }
 
 input:focus {
@@ -72,6 +80,7 @@ input:focus {
 
 .text-input{
   border-radius: 20px;
+  border: none;
   color: aliceblue;
   background-color: #282c34;
   width: 100%;
@@ -97,4 +106,26 @@ input:focus {
   border-radius: 20px;
   width: 50%;
   background-color: #4b7486;
+}
+
+.button6{
+  padding:0.7em 1.4em;
+  margin-top:20px;
+  border-radius:0.15em;
+  text-decoration:none;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  background-color:#3369ff;
+  text-align:center;
+}
+
+a.button6:active{
+  top:0.1em;
+}
+
+@media all and (max-width:30em){
+  a.button6{
+  display:block;
+  margin:0.4em auto;
+  }
 }

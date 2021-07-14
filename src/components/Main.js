@@ -11,22 +11,13 @@ export default class Main extends Component {
       joined: [],
       value: "",
       username: "",
-      boolean: false,
       offline: [],
       fakeObject: [{ username: "anony", message: "welcome to the chat room" }],
     };
   }
   // message and username
 
-  // update state with newobject
-  showObject() {
-    const newObject = {
-      username: "fakeusername",
-      message: "fakeMessage",
-    };
-    this.setState({ fakeObject: [...this.state.fakeObject, newObject] });
-    console.log(this.state.fakeObject);
-  }
+  
 
   componentDidMount() {
     socket.on("messageOut", (sender) => {
@@ -39,13 +30,10 @@ export default class Main extends Component {
       this.setState({ joined: [...this.state.joined, sender] });
     });
 
-    socket.on('initialLogin', (sender) =>{
-      console.log('inside of initialLogijn', sender);
+    socket.on("initialLogin", (sender) => {
+      console.log("inside of initialLogijn", sender);
       this.setState({ offline: sender.storedMessages });
-
     });
-
-
   }
 
   // on submit - socket.emit - username and message
@@ -55,19 +43,21 @@ export default class Main extends Component {
       username: this.state.username,
       message: this.state.value,
     });
+   
   }
-
+  
+ 
   userName(e) {
     e.preventDefault();
     socket.emit("initialLogin", { username: this.state.username });
     this.setState({ boolean: true });
-    console.log("username", this.state.username);
+    // console.log("username", this.state.username);
   }
 
   render() {
-    console.log("Joined array", this.state.joined);
+    // console.log("Joined array", this.state.joined);
     return (
-      <div>
+      <div className="container">
         <div className="main-wrapper">
           <div className="text-wrapper">
             {this.state.fakeObject.map((messages, idx) => (
@@ -84,8 +74,6 @@ export default class Main extends Component {
               </div>
             ))}
 
-            
-
             {this.state.offline.map((messages, idx) => (
               <div className="blub-wrapper-two" key={idx}>
                 <p>{messages.message}</p>
@@ -95,31 +83,37 @@ export default class Main extends Component {
 
           <div className="input-wrapper">
             <form className="input">
-              <label>
-                <input
-                  onChange={(e) => this.setState({ value: e.target.value })}
-                  className="text-input"
-                  placeholder="text message"
-                  type="text"
-                  name="name"
-                ></input>
-              </label>
-              <input onClick={(e) => this.send(e)} type="submit" />
+              <input
+                onChange={(e) => this.setState({ value: e.target.value })}
+                className="text-input"
+                placeholder="text message"
+                type="text"
+                name="message"
+              ></input>
+
+              <input
+                className="button6"
+                onClick={(e) => this.send(e)}
+                type="submit"
+              />
             </form>
           </div>
         </div>
-        <div className="input-wrapper">
+        <div className="input-wrapper2">
           <form className="input">
-            <label>
-              <input
-                onChange={(e) => this.setState({ username: e.target.value })}
-                className="text-input"
-                placeholder="Input User"
-                type="text"
-                name="name"
-              ></input>
-            </label>
-            <input onClick={(e) => this.userName(e)} type="submit" />
+            <input
+              onChange={(e) => this.setState({ username: e.target.value })}
+              className="text-input"
+              placeholder="Input User"
+              type="text"
+              name="name"
+            ></input>
+
+            <input
+              className="button6"
+              onClick={(e) => this.userName(e)}
+              type="submit"
+            />
           </form>
         </div>
       </div>
