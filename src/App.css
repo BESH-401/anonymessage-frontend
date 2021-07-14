@@ -41,7 +41,7 @@ p{
   height: 85%;
   display: flex;
   justify-content: flex-end;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .input-wrapper{
