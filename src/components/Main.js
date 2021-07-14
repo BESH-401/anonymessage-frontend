@@ -62,74 +62,77 @@ export default class Main extends Component {
     return (
       <div className="container">
         {
-          (this.state.isSignedIn)?
-          <div className="main-wrapper">
-          <div className="text-wrapper">
-            {this.state.messages.map((messages, idx) =>
-              typeof messages === "string" ? (
-                <div className="blub-wrapper-two" key={idx}>
-                  <p>{messages}</p>
-                </div>
-              ) : (
-                <div className="blub-wrapper-one" key={idx}>
-                  <p>
-                    {messages.username}: {messages.message}
-                  </p>
-                </div>
-              )
-            )}
-          </div>
+          (this.state.isSignedIn)
+            ?
+            <div className="main-wrapper">
+              <div className="text-wrapper">
+                {this.state.messages.map((messages, idx) =>
+                  typeof messages === "string"
+                    ?
+                    (
+                      <div className="blub-wrapper-two" key={idx}>
+                        <p>{messages}</p>
+                      </div>
+                    )
+                    :
+                    (
+                      <div className="blub-wrapper-one" key={idx}>
+                        <p>
+                          {messages.username}: {messages.message}
+                        </p>
+                      </div>
+                    )
+                )}
+              </div>
 
-          <div className="input-wrapper">
-            <form className="input">
-              <input
-                onChange={(e) => this.setState({ value: e.target.value })}
-                className="text-input"
-                placeholder="text message"
-                type="text"
-                name="message"
-              ></input>
+              <div className="input-wrapper">
+                <form className="input">
+                  <input
+                    onChange={(e) => this.setState({ value: e.target.value })}
+                    className="text-input"
+                    placeholder="text message"
+                    type="text"
+                    name="message"
+                  ></input>
 
-              <input
-                className="button6"
-                onClick={(e) => this.send(e)}
-                type="submit"
-              />
-              <button
-                className="button6"
-                style={{
-                  backgroundColor: "rgb(122, 55, 231)",
-                  marginLeft: "10px",
-                }}
-                onClick={(e) => this.drop(e)}
-              >
-                Disconnect
-              </button>
-            </form>
-          </div>
-        </div>
-        :
-        <div className="input-wrapper2">
-          <h4>Login</h4>
-          <form className="input">
-            <input
-              onChange={(e) => this.setState({ username: e.target.value })}
-              className="text-input"
-              placeholder="Input User"
-              type="text"
-              name="name"
-            ></input>
+                  <input
+                    className="button6"
+                    onClick={(e) => this.send(e)}
+                    type="submit"
+                  />
+                  <button
+                    className="button6"
+                    style={{
+                      backgroundColor: "rgb(122, 55, 231)",
+                      marginLeft: "10px",
+                    }}
+                    onClick={(e) => this.drop(e)}
+                  >
+                    Disconnect
+                  </button>
+                </form>
+              </div>
+            </div>
+            :
+            <div className="input-wrapper2">
+              <h4>Login</h4>
+              <form className="input">
+                <input
+                  onChange={(e) => this.setState({ username: e.target.value })}
+                  className="text-input"
+                  placeholder="Input User"
+                  type="text"
+                  name="name"
+                ></input>
 
-            <input
-              className="button6"
-              onClick={(e) => this.userName(e)}
-              type="submit"
-            />
-          </form>
-        </div>
-
+                <input
+                  className="button6"
+                  onClick={(e) => this.userName(e)}
+                  type="submit"
+                />
+              </form>
+            </div>
         }
-        
       </div>
     );
   }
