@@ -9,6 +9,13 @@ Frontend for AnonyMessage app
 
 - ![main page](anonyimage2.png)
 
+## Set Up
+- dependencies: npm install
+- start: npm start
+- enviroment variables:
+  * REACT_APP_BASE_URL= (base url to backend socket connection)
+  * REACT_APP_EXTENSION= (extention url to socket connection)
+
 ## [Team Besh](https://github.com/BESH-401)
 - [Keian Anthony](https://github.com/Keian-A)
 - [Tek Jones](https://github.com/Tekthree)
@@ -28,3 +35,5 @@ Frontend for AnonyMessage app
 - [AnonyMessage backend code](https://github.com/BESH-401/anonymessage-backend)
 - [AnonyMessage frontend code](https://github.com/BESH-401/anonymessage-frontend)
 
+## License for logo
+- [License](./license_certificate_E24LFNRBUZ.txt)
