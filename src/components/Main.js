@@ -15,9 +15,9 @@ export default class Main extends Component {
       fakeObject: [{ username: "Anony", message: "welcome to the chat room" }],
     };
   }
-  // message and username
 
   componentDidMount() {
+    //----------- user messages from the socket.io hub --------//
     socket.on("messageOut", (sender) => {
       console.log("messageOut", sender);
       this.setState({ messages: [...this.state.messages, sender] });
@@ -46,7 +46,6 @@ export default class Main extends Component {
   userName(e) {
     e.preventDefault();
     socket.emit("initialLogin", { username: this.state.username });
-    // console.log("username", this.state.username);
     this.setState({ isSignedIn: true });
   }
 
@@ -58,81 +57,77 @@ export default class Main extends Component {
   }
 
   render() {
-    // console.log("Joined array", this.state.joined);
     return (
       <div className="container">
-        {
-          (this.state.isSignedIn)
-            ?
-            <div className="main-wrapper">
-              <div className="text-wrapper">
-                {this.state.messages.map((messages, idx) =>
-                  typeof messages === "string"
-                    ?
-                    (
-                      <div className="blub-wrapper-two" key={idx}>
-                        <p>{messages}</p>
-                      </div>
-                    )
-                    :
-                    (
-                      <div className="blub-wrapper-one" key={idx}>
-                        <p>
-                          {messages.username}: {messages.message}
-                        </p>
-                      </div>
-                    )
-                )}
-              </div>
-
-              <div className="input-wrapper">
-                <form className="input">
-                  <input
-                    onChange={(e) => this.setState({ value: e.target.value })}
-                    className="text-input"
-                    placeholder="text message"
-                    type="text"
-                    name="message"
-                  ></input>
-
-                  <input
-                    className="button6"
-                    onClick={(e) => this.send(e)}
-                    type="submit"
-                  />
-                  <button
-                    className="button6"
-                    style={{
-                      backgroundColor: "rgb(122, 55, 231)",
-                      marginLeft: "10px",
-                    }}
-                    onClick={(e) => this.drop(e)}
-                  >
-                    Disconnect
-                  </button>
-                </form>
-              </div>
+        {this.state.isSignedIn ? (
+          <div className="main-wrapper">
+            <div className="text-wrapper">
+              {this.state.messages.map((messages, idx) =>
+                typeof messages === "string" ? (
+                  <div className="blub-wrapper-two" key={idx}>
+                    <p>{messages}</p>
+                  </div>
+                ) : (
+                  <div className="blub-wrapper-one" key={idx}>
+                    <p>
+                      {messages.username}: {messages.message}
+                    </p>
+                  </div>
+                )
+              )}
             </div>
-            :
-            <div className="input-wrapper2">
-              <h4>Login</h4>
+
+            <div className="input-wrapper">
               <form className="input">
                 <input
-                  onChange={(e) => this.setState({ username: e.target.value })}
+                  onChange={(e) => this.setState({ value: e.target.value })}
                   className="text-input"
-                  placeholder="Input User"
+                  placeholder="text message"
                   type="text"
-                  name="name"
+                  name="message"
                 ></input>
 
                 <input
                   className="button6"
-                  onClick={(e) => this.userName(e)}
+                  onClick={(e) => this.send(e)}
                   type="submit"
                 />
+                <button
+                  className="button6"
+                  style={{
+                    backgroundColor: "#454864",
+                    marginLeft: "10px",
+                  }}
+                  onClick={(e) => this.drop(e)}
+                >
+                  Disconnect
+                </button>
               </form>
             </div>
-        }
+          </div>
+        ) : (
+          <div className="input-wrapper2">
+            <h4>Login</h4>
+            <p style={{
+                    color: "#454864",
+                  }}>enter your anonymous name</p>
+            <form className="input">
+              <input
+                onChange={(e) => this.setState({ username: e.target.value })}
+                className="text-input"
+                placeholder="Input User"
+                type="text"
+                name="name"
+              ></input>
+
+              <input
+                className="button6"
+                onClick={(e) => this.userName(e)}
+                type="submit"
+              />
+            </form>
+          </div>
+        )}
       </div>
     );
   }

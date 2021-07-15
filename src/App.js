@@ -1,7 +1,7 @@
-import './App.css';
-import Main from './components/Main.js'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.png'
+import "./App.css";
+import Main from "./components/Main.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "./logo.png";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img className="logo" src={logo} alt="logo"></img>
       </header>
-        <Main/>
+      <Main />
     </div>
   );
 }

@@ -1,13 +1,14 @@
 .App {
   text-align: center;
   padding-bottom: 20%;
-  background-color: #9499a5;
+  background-color: #35374F;
+  min-height: 100vh;
 }
 
 
 .App-header {
-  background: rgb(13,31,60);
-  background: linear-gradient(17deg, rgba(13,31,60,1) 35%, rgba(26,62,132,1) 100%);
+  background: rgb(26,16,48);
+  background: linear-gradient(4deg, rgba(26,16,48,1) 4%, rgba(82,67,185,1) 98%);
   padding: 30px;
   margin-bottom: 50px;
   min-height: 30px;
@@ -39,7 +40,7 @@
   margin: 0 auto 30px auto;
   width: 80%;
   height: 80vh;
-  background-color: #282c34;
+  background-color: #222332;
 }
 
 p{
@@ -56,19 +57,20 @@ p{
 .input-wrapper{
   padding: 20px;
   border-radius: 30px;
-  background-color: #4c525c;
+  background-color: #2B2D3E;
   margin: auto;
   width: 100%;
+  color: #C1C4CE;
   
 }
 
 .input-wrapper2{
   padding: 20px;
-  border-radius: 30px;
-  background-color: #ccd1d8;
+  border-radius: 10px;
+  background-color: #272732;
   margin: auto;
   width: 80%;
-  
+  color:#C1C4CE;
 }
 
 form{
@@ -81,15 +83,22 @@ form.input{
 
 input:focus {
   outline: none !important;
+  background-color: #393A49;
 }
 
 .text-input{
-  border-radius: 20px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  color: aliceblue;
-  background-color: #282c34;
+  color: #C1C4CE;
+  background-color: #343649;
+  font-weight: 600;
   width: 100%;
   height: 50px;
+}
+
+.text-input:focus {
+  background-color: #393A49;
 }
 
 .blub-wrapper-one{
@@ -99,7 +108,7 @@ input:focus {
   margin-bottom: 10px;
   width: 70%;
   word-wrap: break-word;
-  background-color: #4c4e55;
+  background-color: #424451;
 }
 
 .blub-wrapper-two{
@@ -111,17 +120,17 @@ input:focus {
   border-radius: 20px;
   width: 70%;
   word-wrap: break-word;
-  background-color: #4b7486;
+  background-color: #3D5895;
 }
 
 .button6{
   padding:0.7em 1.4em;
   margin-top:20px;
-  border-radius:0.15em;
+  border-radius:0.55em;
   text-decoration:none;
   text-transform:uppercase;
   color:#FFFFFF;
-  background-color:#3369ff;
+  background-color:#655EFC;
   text-align:center;
 }
 
@@ -137,11 +146,7 @@ a.button6:active{
 }
 
 
-.spacer{
-  height: 5%;
-  background-color: #3369ff;
-}
-
 .logo{
   width: 350px;
 }
+
